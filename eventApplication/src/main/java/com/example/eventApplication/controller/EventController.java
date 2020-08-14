@@ -7,9 +7,12 @@ import com.example.eventApplication.message.request.EventForm;
 import com.example.eventApplication.model.Event;
 import com.example.eventApplication.service.serviceImplementation.EventServiceImpl;
 import com.example.eventApplication.service.serviceImplementation.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +60,7 @@ public class EventController {
         Set<Event> events = eventService.getEventsByUserId(userId);
         return ResponseEntity.ok().body(events);
     }
+
 
     /**
      * Handle post request to add an event.

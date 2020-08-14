@@ -69,7 +69,7 @@ public class User {
      * Getting collection of events from join table.
      */
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_event",
             joinColumns = @JoinColumn(name = "user_id_fk"),
             inverseJoinColumns = @JoinColumn(name = "event_id_fk"))
@@ -79,7 +79,7 @@ public class User {
      * Many-to-many mapping between Users and Roles entities.
      * Getting collection of roles from join table.
      */
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -88,7 +88,7 @@ public class User {
     /**
      * One-to-many mapping to get reviews that users wrote.
      */
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Review> reviews = new HashSet<>();
 
     /**

@@ -9,6 +9,9 @@ import com.example.eventApplication.service.serviceImplementation.UserServiceImp
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -49,9 +52,9 @@ public class ReviewController {
     /**
      * Handle post request to post review for an event.
      */
-    @PostMapping("/{id}/events/{event_id}/reviews/new")
+    @MessageMapping("/{id}/events/{event_id}/reviews/new")
     public ResponseEntity<?> postReviewByEventId(@RequestHeader("Authorization") String token,
-                                                 @PathVariable(value = "event_id") Long eventId,
+                                                 @DestinationVariable (value = "event_id") Long eventId,
                                                  @Validated @RequestBody Review response) throws Exception {
 
         Review review = reviewService.postReviewById(eventId, response, token)
@@ -62,9 +65,9 @@ public class ReviewController {
     /**
      * Handle get request to get reviews of an event.
      */
-    @GetMapping("/{id}/events/{event_id}/reviews")
-    public ResponseEntity<?> getReviewByEventId(@PathVariable("event_id") Long eventId,
-                                                @PathVariable("id") String id) throws Exception {
+    @SubscribeMapping("/{id}/events/{event_id}/reviews")
+    public ResponseEntity<?> getReviewByEventId(@DestinationVariable("event_id") Long eventId,
+                                                @DestinationVariable("id") String id) throws Exception {
         Set<Review> reviews = reviewService.getReviewsByEventId(eventId);
         return ResponseEntity.ok().body(reviews);
     }

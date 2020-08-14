@@ -41,12 +41,12 @@ public class Review {
      * Many-to-one mapping for events that reviews belong to.
      */
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,   optional = false)
     @JoinColumn(name = "event_id_fk", nullable = false)
     @JsonIgnore
     private Event event;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(name = "user_id_fk", nullable = false)
     @JsonIgnore
     private User user;

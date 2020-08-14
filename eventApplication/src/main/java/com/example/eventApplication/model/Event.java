@@ -46,7 +46,7 @@ public class Event {
      * One-to-many mapping for reviews of events.
      */
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event",   fetch = FetchType.LAZY)
     private Set<Review> reviews = new HashSet<>();
 
 
@@ -55,7 +55,7 @@ public class Event {
      * One-to-many mapping for categories of events.
      */
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "event",   fetch = FetchType.LAZY)
     private Set<Category> categories;
 
 

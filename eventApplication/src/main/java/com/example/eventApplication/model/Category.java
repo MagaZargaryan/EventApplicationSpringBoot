@@ -40,7 +40,7 @@ public class Category {
      * Many-to-one mapping for the event that category belongs to.
      */
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,  optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     @JsonIgnore
     private Event event;
