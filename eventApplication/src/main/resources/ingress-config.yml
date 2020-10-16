@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-config
+spec:
+  rules:
+    - host: com.app
+      http:
+        paths:
+        - path: /api/users
+          backend:
+            serviceName: springboot-postgres-k8s
+            servicePort: 90
+        - path: /api/users/events
+          backend:
+            serviceName: springboot-postgres-k8s
+            servicePort: 93
